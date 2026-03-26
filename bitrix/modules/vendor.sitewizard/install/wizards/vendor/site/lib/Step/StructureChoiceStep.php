@@ -31,13 +31,24 @@ class StructureChoiceStep extends \CWizardStep
     {
         $wizard = $this->GetWizard();
 
-        $requestCode = isset($_REQUEST['SITE_CODE']) ? trim((string) $_REQUEST['SITE_CODE']) : '';
-        $siteCode = $requestCode !== '' ? $requestCode : trim((string) $wizard->GetVar('SITE_CODE', 's1'));
-
-        if (!preg_match('/^[a-z][a-z0-9_]{0,19}$/i', $siteCode)) {
-            $this->SetError('Код сайта должен начинаться с латинской буквы и содержать только латиницу/цифры/подчеркивание (пример: s1, site2, demo_site).');
-            return false;
+        $rawValue = $_POST['SITE_CODE'] ?? $_REQUEST['SITE_CODE'] ?? $wizard->GetVar('SITE_CODE', 's1');
+        if (is_array($rawValue)) {
+            $rawValue = (string) reset($rawValue);
         }
+
+        $siteCode = trim((string) $rawValue);
+        $siteCode = preg_replace('/[^a-z0-9_]/i', '', $siteCode) ?: '';
+        $siteCode = strtolower($siteCode);
+
+        if ($siteCode === '') {
+            $siteCode = 's1';
+        }
+
+        if (!preg_match('/^[a-z]/', $siteCode)) {
+            $siteCode = 's' . $siteCode;
+        }
+
+        $siteCode = mb_substr($siteCode, 0, 20);
 
         $wizard->SetVar('SITE_CODE', $siteCode);
         $wizard->SetVar('SITE_TYPE', 'all_in_one');
