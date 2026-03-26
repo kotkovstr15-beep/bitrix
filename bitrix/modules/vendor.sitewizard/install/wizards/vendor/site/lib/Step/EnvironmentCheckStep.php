@@ -16,15 +16,18 @@ class EnvironmentCheckStep extends \CWizardStep
 
     public function ShowStep(): void
     {
+        WizardUi::printStyles();
+
         $checker = new EnvironmentChecker();
         $report = $checker->check();
 
-        echo '<ul>';
+        echo '<div class="vsw-card"><h2 class="vsw-title">Проверка окружения</h2><ul class="vsw-checklist">';
         foreach ($report as $item) {
-            $status = $item['ok'] ? '✅' : '❌';
-            echo sprintf('<li>%s %s</li>', $status, htmlspecialcharsbx($item['message']));
+            $statusClass = $item['ok'] ? 'vsw-ok' : 'vsw-bad';
+            $statusText = $item['ok'] ? 'OK' : 'ERROR';
+            echo sprintf('<li><span class="%s">[%s]</span> %s</li>', $statusClass, $statusText, htmlspecialcharsbx($item['message']));
         }
-        echo '</ul>';
+        echo '</ul></div>';
     }
 
     public function OnPostForm(): bool
@@ -35,6 +38,7 @@ class EnvironmentCheckStep extends \CWizardStep
             return false;
         }
 
-        return parent::OnPostForm();
+        parent::OnPostForm();
+        return true;
     }
 }

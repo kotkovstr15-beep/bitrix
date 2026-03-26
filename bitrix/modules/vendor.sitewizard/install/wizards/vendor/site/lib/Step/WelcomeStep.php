@@ -13,6 +13,10 @@ class WelcomeStep extends \CWizardStep
 
     public function ShowStep(): void
     {
-        echo '<p>Мастер создаст структуру сайта, инфоблоки, демо-данные, страницы каталога и региональные настройки.</p>';
+        WizardUi::printStyles();
+        echo '<div class="vsw-card">';
+        echo '<h2 class="vsw-title">Vendor Site Wizard</h2>';
+        echo '<p class="vsw-muted">Мастер создаст базовую структуру сайта, инфоблоки, демо-данные и региональные настройки.</p>';
+        echo '</div>';
     }
 }

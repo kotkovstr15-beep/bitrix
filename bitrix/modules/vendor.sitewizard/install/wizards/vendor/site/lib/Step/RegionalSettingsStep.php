@@ -14,26 +14,31 @@ class RegionalSettingsStep extends \CWizardStep
 
     public function ShowStep(): void
     {
-        $wizard = $this->GetWizard();
+        WizardUi::printStyles();
 
+        $wizard = $this->GetWizard();
         $domains = (array) $wizard->GetVar('DOMAINS', ['site.ru', 'spb.site.ru', 'msk.site.ru']);
         $language = (string) $wizard->GetVar('LANGUAGE_ID', 'ru');
         $currency = (string) $wizard->GetVar('CURRENCY', 'RUB');
 
+        echo '<div class="vsw-card"><h2 class="vsw-title">Домены и локализация</h2><div class="vsw-grid">';
+
         for ($i = 0; $i < 3; $i++) {
             $value = isset($domains[$i]) ? (string) $domains[$i] : '';
-            echo 'Домен ' . ($i + 1) . ': <input type="text" name="DOMAINS[]" value="' . htmlspecialcharsbx($value) . '"><br>';
+            echo '<label>Домен ' . ($i + 1) . '<br><input class="vsw-input" type="text" name="DOMAINS[]" value="' . htmlspecialcharsbx($value) . '"></label>';
         }
 
-        echo '<br>Язык: <select name="LANGUAGE_ID">';
+        echo '<label>Язык<br><select class="vsw-select" name="LANGUAGE_ID">';
         echo '<option value="ru"' . ($language === 'ru' ? ' selected' : '') . '>ru</option>';
         echo '<option value="en"' . ($language === 'en' ? ' selected' : '') . '>en</option>';
-        echo '</select><br><br>';
+        echo '</select></label>';
 
-        echo 'Валюта: <select name="CURRENCY">';
+        echo '<label>Валюта<br><select class="vsw-select" name="CURRENCY">';
         foreach (['RUB', 'USD', 'EUR'] as $code) {
             echo '<option value="' . $code . '"' . ($currency === $code ? ' selected' : '') . '>' . $code . '</option>';
         }
-        echo '</select>';
+        echo '</select></label>';
+
+        echo '</div></div>';
     }
 }

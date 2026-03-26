@@ -12,7 +12,11 @@ class FinishStep extends \CWizardStep
 
     public function ShowStep(): void
     {
-        echo '<p>Мастер успешно завершил разворачивание структуры сайта.</p>';
-        echo '<p>Проверьте публичные разделы: /catalog/, /blog/, /news/, /personal/cart/, /personal/order/make/, /about/, /contacts/.</p>';
+        WizardUi::printStyles();
+        echo '<div class="vsw-card">';
+        echo '<h2 class="vsw-title">Готово</h2>';
+        echo '<p class="vsw-muted">Мастер успешно завершил разворачивание структуры сайта.</p>';
+        echo '<p>Проверьте разделы: <code>/catalog/</code>, <code>/blog/</code>, <code>/news/</code>, <code>/personal/cart/</code>, <code>/personal/order/make/</code>, <code>/about/</code>, <code>/contacts/</code>.</p>';
+        echo '</div>';
     }
 }

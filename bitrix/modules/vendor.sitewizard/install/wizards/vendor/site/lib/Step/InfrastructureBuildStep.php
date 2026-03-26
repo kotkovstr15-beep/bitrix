@@ -16,7 +16,11 @@ class InfrastructureBuildStep extends \CWizardStep
 
     public function ShowStep(): void
     {
-        echo '<p>На этом шаге будут созданы сайты/домены, инфоблоки, страницы, меню, демо-данные и настройки ЧПУ.</p>';
+        WizardUi::printStyles();
+        echo '<div class="vsw-card">';
+        echo '<h2 class="vsw-title">Создание инфраструктуры</h2>';
+        echo '<p class="vsw-muted">Сейчас будут созданы сайты/домены, инфоблоки, страницы, меню, демо-данные и настройки ЧПУ.</p>';
+        echo '</div>';
     }
 
     public function OnPostForm(): bool
@@ -30,6 +34,7 @@ class InfrastructureBuildStep extends \CWizardStep
             return false;
         }
 
-        return parent::OnPostForm();
+        parent::OnPostForm();
+        return true;
     }
 }
