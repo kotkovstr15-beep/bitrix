@@ -8,9 +8,13 @@ use Bitrix\Main\Result;
 
 class InfrastructureBuilder
 {
-    private \CWizard $wizard;
+    /** @var object */
+    private $wizard;
 
-    public function __construct(\CWizard $wizard)
+    /**
+     * @param object $wizard Экземпляр CWizard/CWizardBase
+     */
+    public function __construct($wizard)
     {
         $this->wizard = $wizard;
     }
