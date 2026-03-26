@@ -6,7 +6,8 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
 CModule::IncludeModule('main');
 require_once __DIR__ . '/scripts/init.php';
 
-$wizard = & $this->GetWizard();
+/** @var CWizard $wizard */
+$wizard = $this;
 
 $wizard->AddStep(new \Vendor\SiteWizard\Step\WelcomeStep());
 $wizard->AddStep(new \Vendor\SiteWizard\Step\EnvironmentCheckStep());
