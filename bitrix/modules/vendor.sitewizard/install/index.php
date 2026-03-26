@@ -35,16 +35,16 @@ class vendor_sitewizard extends CModule
     public function DoInstall(): void
     {
         ModuleManager::registerModule($this->MODULE_ID);
-        $this->installFiles();
+        $this->InstallFiles();
     }
 
     public function DoUninstall(): void
     {
-        $this->uninstallFiles();
+        $this->UnInstallFiles();
         ModuleManager::unRegisterModule($this->MODULE_ID);
     }
 
-    private function installFiles(): void
+    public function InstallFiles(): bool
     {
         $wizardSource = __DIR__ . '/wizards';
         $wizardTarget = $_SERVER['DOCUMENT_ROOT'] . '/bitrix/wizards';
@@ -52,13 +52,17 @@ class vendor_sitewizard extends CModule
         if (is_dir($wizardSource)) {
             CopyDirFiles($wizardSource, $wizardTarget, true, true);
         }
+
+        return true;
     }
 
-    private function uninstallFiles(): void
+    public function UnInstallFiles(): bool
     {
         $wizardDir = $_SERVER['DOCUMENT_ROOT'] . '/bitrix/wizards/vendor/site';
         if (is_dir($wizardDir)) {
             DeleteDirFilesEx('/bitrix/wizards/vendor/site');
         }
+
+        return true;
     }
 }
