@@ -1,0 +1,103 @@
+/* WEBDEV global styles: reset, colors and base typography */
+:root {
+    --color-bg: #f7f8fc;
+    --color-surface: #ffffff;
+    --color-text: #172033;
+    --color-muted: #67728a;
+    --color-accent: #4f46e5;
+    --color-accent-dark: #3730a3;
+    --color-border: #e6e9f2;
+    --shadow-soft: 0 20px 45px rgba(23, 32, 51, 0.08);
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --container: 1180px;
+    --font-base: "Inter", "Segoe UI", Arial, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-width: 320px;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-base);
+    font-size: 16px;
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+}
+
+img,
+svg,
+video {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--color-accent);
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+ul,
+ol {
+    margin: 0;
+    padding: 0;
+}
+
+p,
+h1,
+h2,
+h3 {
+    margin-top: 0;
+}
+
+.container {
+    width: min(100% - 32px, var(--container));
+    margin-inline: auto;
+}
+
+.site {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.site-main {
+    flex: 1 0 auto;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
